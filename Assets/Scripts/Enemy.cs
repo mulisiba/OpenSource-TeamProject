@@ -1,0 +1,27 @@
+using UnityEngine;
+
+public class EnemyPatrol : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float moveRange = 3f;
+    [SerializeField] private int damage = 1;
+
+    private Vector2 startPos;
+    private bool movingRight = true;
+
+    void Start()
+    {
+        startPos = transform.position;
+    }
+
+    void Update()
+    {
+        float direction = movingRight ? 1 : -1;
+        transform.Translate(Vector2.right * direction * moveSpeed * Time.deltaTime);
+
+        if (movingRight && transform.position.x > startPos.x + moveRange)
+            movingRight = false;
+        else if (!movingRight && transform.position.x < startPos.x - moveRange)
+            movingRight = true;
+    }
+}
