@@ -8,17 +8,23 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private float moveInput;
+    private Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+        animator.SetBool("IsGround", Mathf.Abs(rb.linearVelocity.y) < 0.01f);
+
 
         if (moveInput != 0)
         {
