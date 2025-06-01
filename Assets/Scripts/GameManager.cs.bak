@@ -1,0 +1,14 @@
+using UnityEngine;
+using TMPro;
+
+public class Gamemanager : MonoBehaviour
+{
+    [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] private TextMeshProUGUI HealthText;
+
+    void Update()
+    {
+        coinText.text = Coin.coinCount.ToString();
+        HealthText.text = PlayerHealth.currentHealth.ToString();
+    }
+}

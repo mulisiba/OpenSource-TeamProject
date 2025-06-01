@@ -43,6 +43,10 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(damageFromEnemy);
         }
+        if (other.gameObject.CompareTag("HarmSpike"))
+        {
+            TakeDamage(damageFromEnemy);
+        }
     }
 
     private System.Collections.IEnumerator InvincibilityFlash()

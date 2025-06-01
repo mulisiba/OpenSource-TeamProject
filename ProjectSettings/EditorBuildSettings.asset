@@ -11,6 +11,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2D_Pixel_Light/Scenes/Complete.unity
     guid: c3e82cf2e80ca5542bbc8025185d98c8
+  - enabled: 1
+    path: Assets/Scenes/GameStartScene.unity
+    guid: ef83050189549b140b1b477e5acc7237
+  - enabled: 1
+    path: Assets/Scenes/GameStageScene.unity
+    guid: 971bd11a01ab15e42a864d24a7e1c88a
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 1aa160091160c3e4e946fdf4fcc32cae
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
