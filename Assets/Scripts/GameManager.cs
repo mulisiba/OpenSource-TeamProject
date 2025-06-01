@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("게임 시작 버튼이 눌렸습니다! GameStageScene으로 이동합니다.");
-        // 버튼이 눌리면 페이드 효과가 생기며 GameStageScene으로 화면 전환
+        // 버튼이 눌리면 GameStageScene으로 화면 전환
         SceneManager.LoadScene("GameStageScene");
     }
 

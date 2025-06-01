@@ -1,6 +1,5 @@
 using UnityEngine;
-using TMPro; // TextMeshProUGUI를 사용한다면 추가
-// using UnityEngine.SceneManagement; // 여기서는 직접 씬 전환 안 하므로 없어도 됨
+using TMPro; 
 
 public class GameStageManager : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class GameStageManager : MonoBehaviour
     {
         InitializeStages();
 
-        // PlayerPrefs에서 시작할 스테이지 번호를 가져옵니다.
+        // PlayerPrefs에서 시작할 스테이지 번호를 가져옴
         // 기본값은 1 (만약 PlayerPrefs에 값이 없거나 StartSpecificStage가 호출되지 않았다면)
         int initialStage = PlayerPrefs.GetInt("StartStage", 1);
         LoadStage(initialStage);
@@ -71,9 +70,6 @@ public class GameStageManager : MonoBehaviour
         else
         {
             Debug.Log("모든 스테이지를 클리어했습니다! 게임 종료 또는 엔딩 화면으로.");
-            // 모든 스테이지 클리어 시 GameStartScene으로 돌아가거나 엔딩 씬으로 이동
-            // SceneManager.LoadScene("GameStartScene"); // GameStartScene으로 돌아가기
-            // SceneManager.LoadScene("EndingScene"); // 엔딩 씬 (필요하다면 SceneManagement 추가)
         }
     }
 }

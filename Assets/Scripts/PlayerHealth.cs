@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     { 
         Destroy(gameObject);
+        SceneManager.LoadScene("GameOverScene");
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -61,7 +63,10 @@ public class PlayerHealth : MonoBehaviour
             timer += blinkInterval;
         }
 
-        spriteRenderer.enabled = true;
+        if (spriteRenderer != null) // 오브젝트가 파괴되기 전에 확인
+        {
+            spriteRenderer.enabled = true;
+        }
         isInvincible = false;
     }
 }

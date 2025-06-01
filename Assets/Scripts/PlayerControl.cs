@@ -6,10 +6,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private float fallLimitY = -10f;
 
+
     // 총알 발사를 위한 새로운 변수 추가
     [SerializeField] private GameObject bulletPrefab; // 발사할 총알 프리팹
     [SerializeField] private Transform firePoint;     // 총알이 발사될 위치 (Transform)
-    [SerializeField] private float fireRate = 0.5f;   // 발사 속도 (초당 발사 횟수)
+    [SerializeField] private float fireRate = 1f;   // 발사 속도 (초당 발사 횟수)
+
+    private int playerDirection = 1; // 1: 오른쪽, -1: 왼쪽 (플레이어의 현재 방향)
+    private SpriteRenderer spriteRenderer; // 플레이어의 SpriteRenderer
 
     private Rigidbody2D rb;
     private float moveInput;
@@ -21,6 +25,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -49,6 +54,16 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // 플레이어의 현재 방향을 업데이트
+        if (transform.localScale.x > 0) // 오른쪽을 보고 있다면 (스케일이 양수)
+        {
+            playerDirection = 1;
+        }
+        else // 왼쪽을 보고 있다면 (스케일이 음수)
+        {
+            playerDirection = -1;
+        }
+
         // 총알 발사
         if (Input.GetKeyDown(KeyCode.Space) && Time.time >= nextFireTime)
         {
@@ -58,15 +73,20 @@ public class PlayerController : MonoBehaviour
     }
     void Shoot()
     {
-        if (bulletPrefab != null && firePoint != null)
+        // 총알 오브젝트 생성
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+
+        // 총알 스크립트 (FlyingObject) 가져오기
+        FlyingObject flyingObject = bullet.GetComponent<FlyingObject>();
+
+        if (flyingObject != null)
         {
-            // bulletPrefab을 firePoint 위치와 회전으로 생성
-            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            // 플레이어의 현재 방향을 총알에 전달
+            flyingObject.Initialize(playerDirection);
         }
         else
         {
-            // 프리팹이나 발사 지점이 연결되지 않았다면 경고 메시지 출력
-            Debug.LogWarning("Bullet Prefab or Fire Point not assigned in PlayerController!");
+            Debug.LogError("생성된 총알 프리팹에 FlyingObject 스크립트가 없습니다!");
         }
     }
 }
