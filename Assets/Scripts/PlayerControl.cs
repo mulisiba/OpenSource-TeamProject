@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Yarn.Unity;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float moveInput;
     private Animator animator;
+    public bool bulletOn = false; // 총알 발사 가능
     private float nextFireTime; // 다음 발사 가능한 시간
 
     void Start()
@@ -65,7 +67,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 총알 발사
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= nextFireTime)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time >= nextFireTime && bulletOn)
         {
             Shoot(); // 총알 발사 함수 호출
             nextFireTime = Time.time + 1f / fireRate; // 다음 발사 가능한 시간 업데이트
@@ -88,5 +90,11 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("생성된 총알 프리팹에 FlyingObject 스크립트가 없습니다!");
         }
+    }
+
+    [YarnCommand("magic_on")]
+    public void Magic_On()
+    {
+        bulletOn = true;
     }
 }
