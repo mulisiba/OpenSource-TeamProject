@@ -7,7 +7,8 @@ DKU open source team 5 repository
 소프트웨어학과 신다연
 사이버보안학과 배승빈
 
-
+To play the game, please download the to-the-gold folder and run .exe file.
+ 
 This project includes the following third-party components:
 
 1. **GothicVania Town**
